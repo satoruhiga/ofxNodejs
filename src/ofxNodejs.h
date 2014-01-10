@@ -10,6 +10,7 @@
 
 #include "ofxNodejsObject.h"
 #include "ofxNodejsFunction.h"
+#include "ofxNodejsBinding.h"
 
 OFX_NODEJS_BEGIN_NAMESPACE
 
@@ -41,6 +42,14 @@ template <FunctionCallback F>
 void registerFunc(string funcname, v8::InvocationCallback function = FunctionWrapper<F>)
 {
 	registerFunc(funcname, function);
+}
+
+void registerClass(string classname, v8::Persistent<v8::Function> function);
+
+template <typename T>
+void registerClass()
+{
+	registerClass(T::getClassName(), T::Init());
 }
 
 OFX_NODEJS_END_NAMESPACE

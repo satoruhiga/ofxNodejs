@@ -85,6 +85,7 @@
 		E4EB691F138AFCF100A09F29 /* CoreOF.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = CoreOF.xcconfig; path = ../../../libs/openFrameworksCompiled/project/osx/CoreOF.xcconfig; sourceTree = SOURCE_ROOT; };
 		E4EB6923138AFD0F00A09F29 /* Project.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Project.xcconfig; sourceTree = "<group>"; };
 		E748F5D8184657B200003352 /* libnode.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libnode.a; sourceTree = "<group>"; };
+		E7AF230118800BD6009B4F24 /* ofxNodejsBinding.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxNodejsBinding.h; sourceTree = "<group>"; };
 		E7C5E466183D87D90092056B /* ares.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ares.h; sourceTree = "<group>"; };
 		E7C5E467183D87D90092056B /* ares_version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ares_version.h; sourceTree = "<group>"; };
 		E7C5E468183D87D90092056B /* http_parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = http_parser.h; sourceTree = "<group>"; };
@@ -249,6 +250,7 @@
 				E7C5E4E9183D88180092056B /* ofxNodejsObject.h */,
 				E7C5E4EA183D88180092056B /* ofxNodejsUtils.cpp */,
 				E7C5E4EB183D88180092056B /* ofxNodejsUtils.h */,
+				E7AF230118800BD6009B4F24 /* ofxNodejsBinding.h */,
 			);
 			path = src;
 			sourceTree = "<group>";

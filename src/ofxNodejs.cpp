@@ -62,8 +62,8 @@ void init(string node_modules_path)
 	// setup node.js
 	//
 
-	const char *argv[] = { "node", "" };
-	int argc = 1;
+	const char *argv[] = { "node", "--expose_gc", "" };
+	int argc = 2;
 
 	vector<string> paths;
 	paths.push_back(ofToDataPath(node_modules_path));
@@ -152,6 +152,16 @@ void registerFunc(string funcname, v8::InvocationCallback function)
 	
 	v8::Local<v8::Function> func = v8::FunctionTemplate::New(function)->GetFunction();
 	global->Set(v8::String::NewSymbol(funcname.c_str()), func);
+}
+
+void registerClass(string classname, v8::Persistent<v8::Function> function)
+{
+	assert(inited);
+	
+	v8::HandleScope scope;
+	v8::Local<v8::Object> global = context->Global();
+
+	global->Set(v8::String::NewSymbol(classname.c_str()), function);
 }
 
 OFX_NODEJS_END_NAMESPACE

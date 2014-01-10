@@ -62,7 +62,7 @@ Object::~Object()
 {
 	v8::HandleScope scope;
 	
-	if (!v->IsFunction())
+	if (!v.IsEmpty() && !v->IsFunction())
 	{
 		v8::Persistent<v8::Value> p = v8::Persistent<v8::Value>(v);
 		p.Dispose();
