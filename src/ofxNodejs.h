@@ -11,8 +11,6 @@
 #include "ofxNodejsObject.h"
 #include "ofxNodejsFunction.h"
 
-// #define USE_JS_BINDING
-
 OFX_NODEJS_BEGIN_NAMESPACE
 
 void init(string node_modules_path = "node_modules");
@@ -23,6 +21,26 @@ inline Object $(const string& source, const string& source_name = "<string>") { 
 Object run(const string& path);
 inline Object $$(const string& path) { return run(path); }
 
-Function registerFunc(string funcname, v8::InvocationCallback function);
+typedef ofxNodejs::Object (*FunctionCallback)(const vector<ofxNodejs::Object>& args);
+
+template <FunctionCallback F>
+v8::Handle<v8::Value> FunctionWrapper(const v8::Arguments& v8_args)
+{
+	v8::HandleScope handle_scope;
+	
+	vector<ofxNodejs::Object> args;
+	for (int i = 0; i < v8_args.Length(); i++)
+		args.push_back(ofxNodejs::Object(v8_args[i]));
+	
+	return F(args);
+}
+
+void registerFunc(string funcname, v8::InvocationCallback function);
+
+template <FunctionCallback F>
+void registerFunc(string funcname, v8::InvocationCallback function = FunctionWrapper<F>)
+{
+	registerFunc(funcname, function);
+}
 
 OFX_NODEJS_END_NAMESPACE

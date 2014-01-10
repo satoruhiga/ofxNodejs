@@ -5,10 +5,6 @@
 
 #include "ofxNodejsUtils.h"
 
-#ifdef USE_JS_BINDING
-extern "C" void of_initialize(v8::Handle<v8::Object> global_obj);
-#endif
-
 using namespace v8;
 
 namespace node
@@ -42,6 +38,8 @@ public:
 	void onExit(ofEventArgs&)
 	{
 		{
+			v8::HandleScope handle_scope;
+			
 			node::EmitExit(process_l);
 			node::RunAtExit();
 		}
@@ -64,7 +62,7 @@ void init(string node_modules_path)
 	// setup node.js
 	//
 
-	char *argv[] = { "node", "" };
+	const char *argv[] = { "node", "" };
 	int argc = 1;
 
 	vector<string> paths;
@@ -93,7 +91,7 @@ void init(string node_modules_path)
 	{
 		using namespace node;
 		
-		Init(argc, argv);
+		Init(argc, (char**)argv);
 		
 		V8::Initialize();
 		
@@ -102,7 +100,7 @@ void init(string node_modules_path)
 		context = Context::New();
 		context_scope = new Context::Scope(context);
 
-		process_l = node::SetupProcessObject(argc, argv);
+		process_l = node::SetupProcessObject(argc, (char**)argv);
 		v8_typed_array::AttachBindings(context->Global());
 		
 		Load(process_l);
@@ -116,14 +114,6 @@ void init(string node_modules_path)
 
 	ofAddListener(ofEvents().update, &listener, &NodeEventListener::onUpdate);
 	ofAddListener(ofEvents().exit, &listener, &NodeEventListener::onExit);
-	
-#ifdef USE_JS_BINDING
-	{
-		v8::HandleScope handle_scope;
-		v8::Local<v8::Object> global = context->Global();
-		of_initialize(global);
-	}
-#endif
 	
 	inited = true;
 }
@@ -153,7 +143,7 @@ Object run(const string& path)
 	return $(buffer.getText(), path);
 }
 
-Function registerFunc(string funcname, v8::InvocationCallback function)
+void registerFunc(string funcname, v8::InvocationCallback function)
 {
 	assert(inited);
 	
@@ -162,8 +152,6 @@ Function registerFunc(string funcname, v8::InvocationCallback function)
 	
 	v8::Local<v8::Function> func = v8::FunctionTemplate::New(function)->GetFunction();
 	global->Set(v8::String::NewSymbol(funcname.c_str()), func);
-	
-	return Function(func);
 }
 
 OFX_NODEJS_END_NAMESPACE

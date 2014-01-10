@@ -78,10 +78,13 @@ Object::Object(const Object& copy)
 
 Object& Object::operator=(const Object& copy)
 {
-	if (!v->IsFunction())
+	if (!v.IsEmpty())
 	{
-		v8::Persistent<v8::Value> p = v8::Persistent<v8::Value>(v);
-		p.Dispose();
+		if (!v->IsFunction())
+		{
+			v8::Persistent<v8::Value> p = v8::Persistent<v8::Value>(v);
+			p.Dispose();
+		}
 	}
 	v = v8::Persistent<v8::Value>::New(copy.v);
 }

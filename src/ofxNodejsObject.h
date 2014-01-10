@@ -9,8 +9,6 @@
 
 OFX_NODEJS_BEGIN_NAMESPACE
 
-class Object;
-
 class Object
 {
 public:
