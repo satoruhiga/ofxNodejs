@@ -1,0 +1,60 @@
+.svn
+.hg
+.cvs
+
+# osx
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+*.app
+._*
+DerivedData
+
+# xcode3
+*.mode1v3
+*.pbxuser
+build/
+
+# xcode4
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/default.*
+**/*.xcodeproj/*
+!**/*.xcodeproj/project.pbxproj
+!**/*.xcodeproj/default.*
+*.xcworkspace/*
+!*.xcworkspace/contents.xcworkspacedata
+
+# windows
+*.exe
+Thumbs.db
+ehthumbs.db
+
+# vs
+ipch/
+[Bb]in/
+[Oo]bj/
+*.aps
+*.ncb
+*.opensdf
+*.sdf
+*.cachefile
+*.suo
+*.user
+*.sln.docstates
+
+# Object files
+*.o
+
+# Libraries
+*.lib
+*.a
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+libs/
