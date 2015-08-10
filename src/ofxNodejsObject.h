@@ -1,7 +1,5 @@
 #pragma once
 
-#include <tr1/unordered_map>
-
 #include "ofMain.h"
 #include "v8.h"
 

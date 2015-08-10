@@ -63,7 +63,7 @@ EOF
 # apply patch
 patch -u -f < patch.diff
 
-./configure --dest-cpu ia32
+./configure --dest-cpu x64
 make -j4
 
 # merge static library
